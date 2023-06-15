@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/simpsonsListFragment">
+
+    <fragment
+        android:id="@+id/simpsonsListFragment"
+        android:name="com.ahmetgur.ahmetgurandroidtask.SimpsonsListFragment"
+        android:label="fragment_simpsons_list"
+        tools:layout="@layout/fragment_simpsons_list" >
+        <action
+            android:id="@+id/action_simpsonsListFragment_to_simpsonsDetailedFragment"
+            app:destination="@id/simpsonsDetailedFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/simpsonsDetailedFragment"
+        android:name="com.ahmetgur.ahmetgurandroidtask.SimpsonsDetailedFragmentArgs"
+        android:label="fragment_simpsons_detailed"
+        tools:layout="@layout/fragment_simpsons_detailed" >
+        <argument
+            android:name="title"
+            app:argType="string" />
+        <argument
+            android:name="textDescription"
+            app:argType="string" />
+        <argument
+            android:name="iconURL"
+            app:argType="string"
+            app:nullable="true" />
+    </fragment>
+</navigation>

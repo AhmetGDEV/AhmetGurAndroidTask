@@ -5,11 +5,12 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 object RetrofitInstance {
 
-    val api: SimpsonApi by lazy {
+    val api: Api by lazy {
         Retrofit.Builder()
             .baseUrl("https://api.duckduckgo.com/")
             .addConverterFactory(GsonConverterFactory.create())
             .build()
-            .create(SimpsonApi::class.java)
+            .create(Api::class.java)
     }
+
 }

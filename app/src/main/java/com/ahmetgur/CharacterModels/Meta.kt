@@ -1,4 +1,4 @@
-package com.ahmetgur.test1
+package com.ahmetgur.CharacterModels
 
 data class Meta(
     val attribution: Any,

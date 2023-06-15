@@ -1,8 +1,4 @@
-package com.ahmetgur.ahmetgurandroidtask
-
-import com.ahmetgur.test1.Icon
-import com.ahmetgur.test1.Meta
-import com.ahmetgur.test1.RelatedTopic
+package com.ahmetgur.CharacterModels
 
 data class Simpson(
     val Abstract: String,
