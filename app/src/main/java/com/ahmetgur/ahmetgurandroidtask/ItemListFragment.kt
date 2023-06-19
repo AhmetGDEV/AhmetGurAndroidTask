@@ -1,5 +1,6 @@
 package com.ahmetgur.ahmetgurandroidtask
 
+
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -9,6 +10,7 @@ import android.view.ViewGroup
 import androidx.core.view.isVisible
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.window.layout.WindowMetricsCalculator
 import com.ahmetgur.CharacterModels.RelatedTopic
 import com.ahmetgur.ahmetgurandroidtask.databinding.FragmentSimpsonsListBinding
 import retrofit2.HttpException
@@ -21,6 +23,8 @@ class SimpsonsListFragment : Fragment() {
     private lateinit var binding: FragmentSimpsonsListBinding
 
     private lateinit var listAdapter: ListAdapter
+
+    private var isTablet: Boolean = false
 
     private var buttonCounter: Int = 0
 
@@ -35,8 +39,8 @@ class SimpsonsListFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        setupRecyclerView()
-
+        isTablet = computeWindowSizeClasses()
+        setupRecyclerView(isTablet)
         simpsonsFetchCall()
         theWireFetchCall()
 
@@ -49,8 +53,8 @@ class SimpsonsListFragment : Fragment() {
         }
     }
 
-    private fun setupRecyclerView() = binding.rvSimpsons.apply {
-        listAdapter = ListAdapter()
+    private fun setupRecyclerView(isTablet:Boolean) = binding.rvSimpsons.apply {
+        listAdapter = ListAdapter(isTablet)
         adapter = listAdapter
 
         layoutManager = LinearLayoutManager(activity)
@@ -103,5 +107,18 @@ class SimpsonsListFragment : Fragment() {
 
     private fun setupNavigationGraphDirection(){
         listAdapter.onItemClick?.invoke(listAdapter.itemCount)
+    }
+
+    private fun computeWindowSizeClasses(): Boolean {
+        val metrics = WindowMetricsCalculator.getOrCreate()
+            .computeCurrentWindowMetrics(requireActivity())
+
+        val widthDp = metrics.bounds.width() /
+                resources.displayMetrics.density
+        val widthWindowSizeClass = when {
+            widthDp < 600f -> false
+            else -> true
+        } // Use widthWindowSizeClass and heightWindowSizeClass.
+        return widthWindowSizeClass
     }
 }

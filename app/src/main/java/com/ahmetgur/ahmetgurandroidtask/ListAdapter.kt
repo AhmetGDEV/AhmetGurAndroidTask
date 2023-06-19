@@ -1,17 +1,21 @@
 package com.ahmetgur.ahmetgurandroidtask
 
+
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
-import com.ahmetgur.ahmetgurandroidtask.databinding.ItemSimpsonBinding
 import com.ahmetgur.CharacterModels.RelatedTopic
+import com.ahmetgur.ahmetgurandroidtask.databinding.ItemSimpsonBinding
+import com.squareup.picasso.Picasso
 
-class ListAdapter : RecyclerView.Adapter<ListAdapter.SimpsonViewHolder>() {
+class ListAdapter(isTablet_: Boolean) : RecyclerView.Adapter<ListAdapter.SimpsonViewHolder>() {
 
     var onItemClick: ((position: Int) -> Unit)? = null
+    var isTablet = isTablet_
+
 
     inner class SimpsonViewHolder(val binding: ItemSimpsonBinding) :
         RecyclerView.ViewHolder(binding.root) {
@@ -19,13 +23,15 @@ class ListAdapter : RecyclerView.Adapter<ListAdapter.SimpsonViewHolder>() {
             itemView.setOnClickListener {
                 val navController = Navigation.findNavController(itemView)
                 onItemClick?.invoke(adapterPosition)
-                navController.navigate(
-                    SimpsonsListFragmentDirections.actionSimpsonsListFragmentToSimpsonsDetailedFragment(
-                        getTitle(simpsons,adapterPosition)[0],
-                        getTitle(simpsons,adapterPosition)[1],
-                        simpsons[adapterPosition].Icon.URL
+                if (!isTablet) {
+                    navController.navigate(
+                        SimpsonsListFragmentDirections.actionSimpsonsListFragmentToSimpsonsDetailedFragment(
+                            getTitle(simpsons, adapterPosition)[0],
+                            getTitle(simpsons, adapterPosition)[1],
+                            simpsons[adapterPosition].Icon.URL
+                        )
                     )
-                )
+                }
             }
         }
     }
@@ -50,12 +56,13 @@ class ListAdapter : RecyclerView.Adapter<ListAdapter.SimpsonViewHolder>() {
     override fun getItemCount() = simpsons.size
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SimpsonViewHolder {
+        context = parent.context
         return SimpsonViewHolder(
             ItemSimpsonBinding.inflate(
                 LayoutInflater.from(parent.context),
                 parent,
                 false
-            )
+            ),
         )
     }
 
@@ -63,10 +70,21 @@ class ListAdapter : RecyclerView.Adapter<ListAdapter.SimpsonViewHolder>() {
         holder.binding.apply {
             val simpson = simpsons[position]
             val title = simpson.Text.split(" -")
-            tvTitle.text = title[0]
+            if (isTablet) {
+                ivTablet?.setImageResource(R.mipmap.ic_launcher)
+                tvTitleTablet?.text = title[0]
+                tvDescriptionTablet?.text = simpson.Text
+                if (simpson.Icon.URL != "")
+                    Picasso.with(context).load("https://duckduckgo.com/".plus(simpson.Icon.URL))
+                        .into(ivTablet)
+            } else {
+                tvTitle?.text = title[0]
+            }
+
         }
     }
 
     fun getTitle(simpson: List<RelatedTopic>, position: Int) = simpson[position].Text.split(" -")
+
 
 }

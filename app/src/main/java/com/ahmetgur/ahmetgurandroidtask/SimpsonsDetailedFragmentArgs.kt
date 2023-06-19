@@ -5,7 +5,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.navigation.NavArgs
 import androidx.navigation.fragment.navArgs
 import com.ahmetgur.ahmetgurandroidtask.databinding.FragmentSimpsonsDetailedBinding
 import com.squareup.picasso.Picasso
@@ -26,11 +25,11 @@ class SimpsonsDetailedFragmentArgs : Fragment() {
         setUpViews()
     }
 
-    fun setUpViews(){
-        binding.simpsonImageView.setImageResource(R.mipmap.ic_launcher)
-        binding.simpsonTitleText.text = args.title
-        binding.simpsonDescriptionText.text = args.textDescription
+    private fun setUpViews(){
+        binding.ivDetailed.setImageResource(R.mipmap.ic_launcher)
+        binding.tvTitleDetailed.text = args.title
+        binding.tvDescriptionDetailed.text = args.textDescription
         if (args.iconURL != "")
-            Picasso.with(context).load("https://duckduckgo.com/".plus(args.iconURL)).into(binding.simpsonImageView)
+            Picasso.with(context).load("https://duckduckgo.com/".plus(args.iconURL)).into(binding.ivDetailed)
     }
 }

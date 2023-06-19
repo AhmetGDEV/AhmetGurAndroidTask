@@ -3,43 +3,48 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".SimpsonsDetailedFragmentArgs">
+    android:layout_height="wrap_content"
+    android:layout_margin="8dp"
+    android:padding="8dp"
+    >
 
     <ImageView
-        android:id="@+id/ivDetailed"
+        android:id="@+id/ivTablet"
         android:layout_width="200dp"
         android:layout_height="200dp"
-        android:layout_marginTop="25dp"
+        android:layout_margin="8dp"
         android:src="@mipmap/ic_launcher"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        android:contentDescription="@string/image" />
+        android:contentDescription="@string/image_view_tablet" />
 
     <TextView
-        android:id="@+id/tvTitleDetailed"
+        android:id="@+id/tvTitleTablet"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="25dp"
-        tools:text="This is a title"
+        android:layout_margin="5sp"
+        android:elevation="3dp"
         android:textColor="@color/black"
-        android:textSize="35sp"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toTopOf="@+id/tvDescriptionTablet"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/ivDetailed" />
+        app:layout_constraintStart_toEndOf="@+id/ivTablet"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="Title" />
 
     <TextView
-        android:id="@+id/tvDescriptionDetailed"
-        android:layout_width="wrap_content"
+
+        android:id="@+id/tvDescriptionTablet"
+        android:layout_width="0sp"
         android:layout_height="wrap_content"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        android:textSize="20sp"
-        android:layout_marginTop="10dp"
         android:padding="10dp"
         android:textColor="@color/black"
-        app:layout_constraintTop_toBottomOf="@id/tvTitleDetailed"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/ivTablet"
+        app:layout_constraintTop_toBottomOf="@id/tvTitleTablet"
         tools:text="Barney Gumble - Barnard Arnold Barney Gumble is a recurring character in the American animated TV series The Simpsons. He is voiced by Dan Castellaneta and first appeared in the series premiere episode Simpsons Roasting on an Open Fire. Barney is the town drunk of Springfield and one of Homer Simpson's friends." />
 
 
