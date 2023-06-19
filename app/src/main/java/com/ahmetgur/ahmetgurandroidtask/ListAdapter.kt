@@ -1,6 +1,7 @@
 package com.ahmetgur.ahmetgurandroidtask
 
 
+import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.navigation.Navigation
@@ -15,6 +16,7 @@ class ListAdapter(isTablet_: Boolean) : RecyclerView.Adapter<ListAdapter.Simpson
 
     var onItemClick: ((position: Int) -> Unit)? = null
     var isTablet = isTablet_
+    private var context: Context? = null
 
 
     inner class SimpsonViewHolder(val binding: ItemSimpsonBinding) :
@@ -56,7 +58,7 @@ class ListAdapter(isTablet_: Boolean) : RecyclerView.Adapter<ListAdapter.Simpson
     override fun getItemCount() = simpsons.size
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SimpsonViewHolder {
-        context = parent.context
+            context = parent.context
         return SimpsonViewHolder(
             ItemSimpsonBinding.inflate(
                 LayoutInflater.from(parent.context),
